@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -24,6 +26,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             buttonOperatorPercent, buttonDot, buttonSignalNumber, buttonCleanDisplay;
     private String operatorDisplay = "", operator = "";
     private Double operand;
+    private List<Button> buttonList = new ArrayList<>();
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
@@ -51,6 +54,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonOperatorMultiply.setOnClickListener( this );
         buttonOperatorDivision.setOnClickListener( this );
         buttonOperatorPercent.setOnClickListener( this );
+
+        buttonList.add(buttonOperatorSum);
+        buttonList.add(buttonOperatorSubtract);
+        buttonList.add(buttonOperatorMultiply);
+        buttonList.add(buttonOperatorDivision);
+        buttonList.add(buttonOperatorPercent);
     }
 
     private void initializeVariables() {
@@ -76,89 +85,124 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         buttonOperatorSum = findViewById( R.id.button_sum );
     }
 
-    @SuppressLint( "SetTextI18n" )
+    @SuppressLint({"SetTextI18n"})
     @Override
     public void onClick( View view ) {
+
+        Button button = (Button) view;
+
         switch ( view.getId() ) {
             case R.id.button_zero:
                 changeTextViewDisplay( ZERO );
                 unselectedOperatorButton();
+                clearStateButton(null);
                 break;
             case R.id.button_one:
                 changeTextViewDisplay( ONE );
                 unselectedOperatorButton();
+                clearStateButton(null);
                 break;
             case R.id.button_two:
                 changeTextViewDisplay( TWO );
                 unselectedOperatorButton();
+                clearStateButton(null);
                 break;
             case R.id.button_three:
                 changeTextViewDisplay( THREE );
                 unselectedOperatorButton();
+                clearStateButton(null);
                 break;
             case R.id.button_four:
                 changeTextViewDisplay( FOUR );
                 unselectedOperatorButton();
+                clearStateButton(null);
                 break;
             case R.id.button_five:
                 changeTextViewDisplay( FIVE );
                 unselectedOperatorButton();
+                clearStateButton(null);
                 break;
             case R.id.button_six:
                 changeTextViewDisplay( SIX );
                 unselectedOperatorButton();
+                clearStateButton(null);
                 break;
             case R.id.button_seven:
                 changeTextViewDisplay( SEVEN );
                 unselectedOperatorButton();
+                clearStateButton(null);
                 break;
             case R.id.button_eight:
                 changeTextViewDisplay( EIGHT );
                 unselectedOperatorButton();
+                clearStateButton(null);
                 break;
             case R.id.button_nine:
                 changeTextViewDisplay( NINE );
                 unselectedOperatorButton();
+                clearStateButton(null);
                 break;
             case R.id.button_sum:
                 unselectedOperatorButton();
                 operatorDisplay = operator = "+";
-                buttonOperatorSum.setTextColor( Color.BLACK );
+                buttonOperatorSum.setTextColor( Color.parseColor("#FBA644") );
+                clearStateButton(button);
                 break;
             case R.id.button_subtract:
                 unselectedOperatorButton();
                 operatorDisplay = operator = "-";
-                buttonOperatorSubtract.setTextColor( Color.BLACK );
+                buttonOperatorSubtract.setTextColor( Color.parseColor("#FBA644") );
+                clearStateButton(button);
                 break;
             case R.id.button_multiply:
                 unselectedOperatorButton();
                 operatorDisplay = operator = "*";
-                buttonOperatorMultiply.setTextColor( Color.BLACK );
+                buttonOperatorMultiply.setTextColor(Color.parseColor("#FBA644") );
+                clearStateButton(button);
                 break;
             case R.id.button_division:
                 unselectedOperatorButton();
                 operatorDisplay = operator = "/";
-                buttonOperatorDivision.setTextColor( Color.BLACK );
+                buttonOperatorDivision.setTextColor( Color.parseColor("#FBA644") );
+                clearStateButton(button);
                 break;
             case R.id.button_equals:
                 result();
                 unselectedOperatorButton();
+                clearStateButton(null);
                 break;
             case R.id.button_percent:
                 unselectedOperatorButton();
                 textViewDisplay.setText( String.valueOf( Double.parseDouble( textViewDisplay.getText().toString() ) / 100 ) );
+                clearStateButton(null);
                 break;
             case R.id.button_dot:
                 unselectedOperatorButton();
                 textViewDisplay.setText( textViewDisplay.getText().toString() + DOT );
+                clearStateButton(null);
                 break;
             case R.id.button_clean_display:
                 unselectedOperatorButton();
                 textViewDisplay.setText( ZERO );
                 operand = null;
+                clearStateButton(null);
                 break;
             case R.id.button_signal_number:
                 changeTextViewDisplay( SIGNAL );
+                clearStateButton(null);
+        }
+    }
+
+    private void clearStateButton(Button button){
+
+        for(Button b : buttonList){
+            b.setSelected(false);
+            b.setPressed(false);
+        }
+
+        if(button != null) {
+            button.setSelected(true);
+            button.setPressed(false);
         }
     }
 

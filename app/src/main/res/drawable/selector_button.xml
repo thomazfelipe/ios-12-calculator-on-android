@@ -1,7 +1,12 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:drawable="@drawable/circle_selected_button" android:state_focused="true" />
-    <item android:drawable="@drawable/circle_selected_button" android:state_pressed="true" />
-    <item android:drawable="@drawable/circle_selected_button" android:state_checkable="true" />
-    <item android:drawable="@drawable/circle_selected_button" android:state_enabled="false" />
-    <item android:drawable="@drawable/circle_orange" />
+
+    <item android:drawable="@drawable/circle_orange"
+          android:state_focused="false"
+          android:state_pressed="false"
+          android:state_selected="false"/>
+
+    <item android:drawable="@drawable/circle_selected_button"
+          android:state_pressed="true"/>
+
+    <item android:drawable="@drawable/circle_selected_button" />
 </selector>
